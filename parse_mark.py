@@ -2,8 +2,7 @@
 
 import os
 import sys
-
-print("begin")
+import time
 
 n = 0
 def save(f, time):
@@ -19,8 +18,12 @@ def save(f, time):
 
 infile = open(sys.argv[1], "r");
 filename = os.path.basename(sys.argv[1]);
-path = filename.replace(".bin", "_mark.txt");
+path = filename.replace(".bin", ".sta");
 outfile = open(os.getcwd() + "/" + path, "wb");
+
+print("Start to parse data...")
+
+tims_start = time.time()
 
 a = infile.read(1);
 
@@ -43,7 +46,12 @@ while a != "":
 
     a = infile.read(1);
 
-infile.close();
-outfile.close();
+time_end = time.time()
+time_cost = time_end - tims_start
+time_cost = format(time_cost, '.2f')
+print("Time used " + str(time_cost) + 's...')
 
-print("end")
+infile.close()
+outfile.close()
+
+print("Parse data done...")
