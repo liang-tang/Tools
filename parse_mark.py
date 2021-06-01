@@ -13,6 +13,7 @@ def save(f, time):
     f.write("    Desc: \"CAMERA PLUSE\"\n");
     f.write("    GTim: ");
     Gtim = time[1] + time[2] / 1e9;
+    Gtim = format(Gtim, '.6f');
     f.write(str(Gtim) + " " + str(time[0]) + "\n");
     f.write("}\n");
 
