@@ -5,7 +5,7 @@ import sys
 import time
 
 n = 0
-def save(f, time):
+def save_as_sta(f, time):
     f.write("Mrk {\n")
     event = "    Event: \"%d\"\n" %(n)
     f.write(event)
@@ -16,9 +16,14 @@ def save(f, time):
     f.write(str(Gtim) + " " + str(time[0]) + "\n")
     f.write("}\n")
 
+def save_as_mrk(f, time):
+    Gtim = time[1] + time[2] / 1e9
+    Gtim = format(Gtim, '.6f')
+    f.write(str(n) + " " + str(Gtim) + " " + "[" + str(time[0]) + "]" + "\n")
+
 infile = open(sys.argv[1], "r")
 filename = os.path.basename(sys.argv[1])
-path = filename.replace(".bin", ".sta")
+path = filename.replace(".bin", ".mrk")
 outfile = open(os.getcwd() + "/" + path, "wb")
 
 print("Start to parse data...")
@@ -41,7 +46,7 @@ while a != "":
             sec = ord(c[3]) << 24 | ord(c[2]) << 16 | ord(c[1]) << 8 | ord(c[0]) << 0
             c = infile.read(4); # nsec
             nsec = ord(c[3]) << 24 | ord(c[2]) << 16 | ord(c[1]) << 8 | ord(c[0]) << 0
-            save(outfile, [week, sec, nsec])
+            save_as_mrk(outfile, [week, sec, nsec])
             n += 1
 
     a = infile.read(1)
