@@ -17,8 +17,9 @@ def save(f, time):
     f.write("}\n");
 
 infile = open(sys.argv[1], "r");
-path = sys.argv[1].replace(".bin", "_mark.txt");
-outfile = open(path, "wb");
+filename = os.path.basename(sys.argv[1]);
+path = filename.replace(".bin", "_mark.txt");
+outfile = open(os.getcwd() + "/" + path, "wb");
 
 a = infile.read(1);
 
