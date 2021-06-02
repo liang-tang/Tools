@@ -4,7 +4,7 @@ import os
 import sys
 import time
 
-n = 0
+n = 1
 def save_as_sta(f, time):
     f.write("Mrk {\n")
     event = "    Event: \"%d\"\n" %(n)
@@ -23,7 +23,7 @@ def save_as_mrk(f, time):
 
 infile = open(sys.argv[1], "r")
 filename = os.path.basename(sys.argv[1])
-path = filename.replace(".bin", ".mrk")
+path = filename.replace(".dat", ".MRK")
 outfile = open(os.getcwd() + "/" + path, "wb")
 
 print("Start to parse data...")
